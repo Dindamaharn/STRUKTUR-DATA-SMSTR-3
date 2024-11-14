@@ -14,11 +14,11 @@ bool is_valid_code(const char* code) {
         char ch = code[i];
         
         // Jika karakter adalah tanda buka, push ke stack
-        if (ch == '(' || ch == '{' || ch == '[') {
+        if (ch == '(' || ch == '{' || ch == '[' || ch == '<') {
             stack[++top] = ch;  // Push ke stack
         }
         // Jika karakter adalah tanda tutup, periksa kecocokan dengan stack
-        else if (ch == ')' || ch == '}' || ch == ']') {
+        else if (ch == ')' || ch == '}' || ch == ']' || ch == '>') {
             // Jika stack kosong, berarti tidak ada tanda buka yang sesuai
             if (top == -1) {
                 return false;
@@ -28,7 +28,8 @@ bool is_valid_code(const char* code) {
             // Periksa apakah tanda buka yang ada di stack sesuai dengan tanda tutup yang ditemukan
             if ((ch == ')' && topChar != '(') || 
                 (ch == '}' && topChar != '{') || 
-                (ch == ']' && topChar != '[')) {
+                (ch == ']' && topChar != '[') ||
+                (ch == '>' && topChar != '<')) {
                 return false;
             }
         }
